@@ -9,21 +9,98 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600&family=Syne:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="templatemo-nexaverse.css">
     <style>
-        /* Simple styling for code blocks to make them readable */
+        /* Code block styling */
         pre {
             background: var(--glass-bg);
             backdrop-filter: blur(20px);
             border: 1px solid var(--glass-border);
             border-radius: 12px;
             padding: 15px;
-            margin-top: 12px;
-            font-size: 12px;
+            margin: 12px 0;
+            font-size: 13px;
             overflow-x: auto;
             white-space: pre-wrap;
             color: #e0e0ff;
         }
         code {
             font-family: 'Courier New', monospace;
+        }
+
+        /* Scripts Grid */
+        .scripts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .script-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 25px;
+            transition: all 0.4s ease;
+        }
+
+        .script-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            border-color: var(--primary);
+        }
+
+        .script-card h3 {
+            font-family: 'Syne', sans-serif;
+            font-size: 18px;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            margin-bottom: 15px;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .script-card p {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 10px;
+        }
+
+        .script-card a {
+            color: var(--primary);
+            text-decoration: underline;
+        }
+
+        .copy-btn {
+            padding: 10px 20px;
+            background: rgba(0, 240, 255, 0.1);
+            border: 1px solid var(--primary);
+            border-radius: 50px;
+            color: var(--primary);
+            font-size: 13px;
+            cursor: pointer;
+            margin-top: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .copy-btn:hover {
+            background: var(--primary);
+            color: #000;
         }
     </style>
 </head>
@@ -142,7 +219,7 @@
                 </div>
             </div>
 
-            <!-- Services Section (with Lua script examples) -->
+            <!-- Services Section - Now with Script Cards Grid -->
             <div class="content-section" id="services">
                 <div class="section-header-small">
                     <div class="small-logo">
@@ -165,123 +242,120 @@
                 <button class="back-btn" onclick="backToMenu()">← Back to Menu</button>
 
                 <div class="section-header">
-                    <h2 class="section-title">My Scripting Services</h2>
-                    <p class="section-subtitle">Custom Lua scripts for your Roblox games</p>
+                    <h2 class="section-title">Free Scripts & Tutorials</h2>
+                    <p class="section-subtitle">Useful Roblox scripting resources with video tutorials</p>
                 </div>
 
-                <div class="tabs-container">
-                    <div class="tab-buttons">
-                        <button class="tab-btn active" onclick="switchTab(this, 'gameplay')">Gameplay Mechanics</button>
-                        <button class="tab-btn" onclick="switchTab(this, 'ui')">UI & GUIs</button>
-                        <button class="tab-btn" onclick="switchTab(this, 'systems')">Game Systems</button>
-                        <button class="tab-btn" onclick="switchTab(this, 'optimization')">Optimization & Fixes</button>
+                <section class="scripts-grid">
+                    <!-- Card 1 -->
+                    <div class="script-card">
+                        <h3>How to make Combat System V1</h3>
+                        <div class="video-wrapper">
+                            <iframe src="https://www.youtube.com/embed/Wt95LKb17bM" allowfullscreen></iframe>
+                        </div>
+                        <p>Model Link: <a href="https://create.roblox.com/store/asset/121797332345085/Combat" target="_blank">Click here to get the model</a></p>
+                        <pre><code>https://pastebin.com/raw/bXtNR0Rs</code></pre>
+                        <button class="copy-btn">Copy Script Link</button>
                     </div>
 
-                    <div class="tab-content">
-                        <div class="tab-pane active" id="gameplay">
-                            <div class="services-list">
-                                <div class="service-row">
-                                    <div class="service-row-content">
-                                        <h4>Tools & Weapons</h4>
-                                        <p>Custom swords, guns, abilities with animations and effects.</p>
-                                        <pre><code>-- Simple Tool Damage Script (ServerScript in Tool)
-local tool = script.Parent
-
-tool.Activated:Connect(function()
-    local humanoid = tool.Parent:FindFirstChild("Humanoid")
-    if humanoid and humanoid.Health > 0 then
-        humanoid:TakeDamage(20)
-    end
-end)</code></pre>
-                                    </div>
-                                    <div class="service-row-arrow">→</div>
-                                </div>
-                                <div class="service-row">
-                                    <div class="service-row-content">
-                                        <h4>Doors & Interactables</h4>
-                                        <p>ProximityPrompt doors, buttons, levers with sounds.</p>
-                                        <pre><code>-- ProximityPrompt Door Script
-local prompt = script.Parent.ProximityPrompt
-local door = script.Parent.Parent
-
-prompt.Triggered:Connect(function(player)
-    door.Transparency = 1
-    door.CanCollide = false
-    wait(3)
-    door.Transparency = 0
-    door.CanCollide = true
-end)</code></pre>
-                                    </div>
-                                    <div class="service-row-arrow">→</div>
-                                </div>
-                            </div>
+                    <!-- Card 2 -->
+                    <div class="script-card">
+                        <h3>How to add Robux icon in Text Box</h3>
+                        <div class="video-wrapper">
+                            <iframe src="https://www.youtube.com/embed/_R1N7Ko3yeg" allowfullscreen></iframe>
                         </div>
-
-                        <div class="tab-pane" id="ui">
-                            <div class="services-list">
-                                <div class="service-row">
-                                    <div class="service-row-content">
-                                        <h4>Custom GUIs</h4>
-                                        <p>Health bars, shops, inventories, scoreboards.</p>
-                                        <pre><code>-- Health Bar Update (LocalScript in StarterGui)
-local player = game.Players.LocalPlayer
-local humanoid = player.Character:WaitForChild("Humanoid")
-
-humanoid.HealthChanged:Connect(function(health)
-    script.Parent.HealthBar.Size = UDim2.new(health / humanoid.MaxHealth, 0, 1, 0)
-end)</code></pre>
-                                    </div>
-                                    <div class="service-row-arrow">→</div>
-                                </div>
-                                <div class="service-row">
-                                    <div class="service-row-content">
-                                        <h4>Leaderboards & Stats</h4>
-                                        <p>Player kills, wins, currency with DataStore saving.</p>
-                                    </div>
-                                    <div class="service-row-arrow">→</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="tab-pane" id="systems">
-                            <div class="services-list">
-                                <div class="service-row">
-                                    <div class="service-row-content">
-                                        <h4>Tycoons & Obbies</h4>
-                                        <p>Full tycoon droppers, purchasers, or obstacle courses.</p>
-                                    </div>
-                                    <div class="service-row-arrow">→</div>
-                                </div>
-                                <div class="service-row">
-                                    <div class="service-row-content">
-                                        <h4>Anti-Cheat Basics</h4>
-                                        <p>RemoteEvent validation and exploit protection.</p>
-                                    </div>
-                                    <div class="service-row-arrow">→</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="tab-pane" id="optimization">
-                            <div class="services-list">
-                                <div class="service-row">
-                                    <div class="service-row-content">
-                                        <h4>Performance Optimization</h4>
-                                        <p>Reduce lag, fix memory leaks, optimize loops.</p>
-                                    </div>
-                                    <div class="service-row-arrow">→</div>
-                                </div>
-                                <div class="service-row">
-                                    <div class="service-row-content">
-                                        <h4>Bug Fixes & Debugging</h4>
-                                        <p>Find and fix broken mechanics or errors.</p>
-                                    </div>
-                                    <div class="service-row-arrow">→</div>
-                                </div>
-                            </div>
-                        </div>
+                        <p>Here is the Robux icon – copy and paste it in your TextButton or TextLabel!</p>
+                        <pre><code></code></pre>
+                        <button class="copy-btn">Copy Robux Icon</button>
                     </div>
-                </div>
+
+                    <!-- Card 3 -->
+                    <div class="script-card">
+                        <h3>How to make Combat System V2</h3>
+                        <div class="video-wrapper">
+                            <iframe src="https://www.youtube.com/embed/AZ6S-9iw6fE" allowfullscreen></iframe>
+                        </div>
+                        <p>Model Link: <a href="https://create.roblox.com/store/asset/121797332345085/Combat" target="_blank">Click here to get the model</a></p>
+                        <pre><code>https://pastefy.app/2GC1CnoF/raw</code></pre>
+                        <button class="copy-btn">Copy Script Link</button>
+                    </div>
+
+                    <!-- Card 4 -->
+                    <div class="script-card">
+                        <h3>How to make Dash System</h3>
+                        <div class="video-wrapper">
+                            <iframe src="https://www.youtube.com/embed/rUUcRhd3fjY" allowfullscreen></iframe>
+                        </div>
+                        <p>watch the video carefully!!!</p>
+                        <pre><code>https://pastefy.app/2GC1CnoF/raw</code></pre>
+                        <p><strong>Note:</strong> Local Script inside Button</p>
+                        <button class="copy-btn">Copy Script Link</button>
+                    </div>
+
+                    <!-- Card 5 -->
+                    <div class="script-card">
+                        <h3>How to make Block System</h3>
+                        <div class="video-wrapper">
+                            <iframe src="https://www.youtube.com/embed/0glXrSGrK_I" allowfullscreen></iframe>
+                        </div>
+                        <p><strong>Put the Scripts in right PLACE!!!</strong></p>
+                        <p>Script inside ServerScriptService:</p>
+                        <pre><code>https://pastefy.app/4Z6bLjFR/raw</code></pre>
+                        <button class="copy-btn">Copy Server Script Link</button>
+                        <p>LocalScript inside TextButton or ImageButton:</p>
+                        <pre><code>https://pastefy.app/EKfGIoO7/raw</code></pre>
+                        <button class="copy-btn">Copy LocalScript Link</button>
+                    </div>
+
+                    <!-- Card 6 -->
+                    <div class="script-card">
+                        <h3>Soccer Game Part 1 Model</h3>
+                        <div class="video-wrapper">
+                            <iframe src="https://www.youtube.com/embed/Bu1ZdREmR-4" allowfullscreen></iframe>
+                        </div>
+                        <p><strong>THERE IS IMPORTANT PART.GO WATCH VIDEO BEFORE USING THIS MODEL</strong></p>
+                        <p>Model Link: <a href="https://create.roblox.com/store/asset/12207014022/Soccer-Game-Part-1-By-AharonFusions" target="_blank">Click here to get the model</a></p>
+                    </div>
+
+                    <!-- Card 7 -->
+                    <div class="script-card">
+                        <h3>How to make C00lkid Button</h3>
+                        <div class="video-wrapper">
+                            <iframe src="https://www.youtube.com/embed/0o7tcmOiSUM" allowfullscreen></iframe>
+                        </div>
+                        <p>Credits to Tomato Studio for scripts</p>
+                        <p>Local Script inside the Button:</p>
+                        <pre><code>https://pastefy.app/apYCUlMe/raw</code></pre>
+                        <button class="copy-btn">Copy Local Script Link</button>
+                        <p>Script inside the ServerScriptService:</p>
+                        <pre><code>https://pastefy.app/pmll9vn9/raw</code></pre>
+                        <button class="copy-btn">Copy Server Script Link</button>
+                    </div>
+
+                    <!-- Card 8 -->
+                    <div class="script-card">
+                        <h3>How to make Combat System V3</h3>
+                        <div class="video-wrapper">
+                            <iframe src="https://www.youtube.com/embed/lgkNHggZnXI" allowfullscreen></iframe>
+                        </div>
+                        <p><a href="https://create.roblox.com/store/asset/121797332345085/Combat" target="_blank">Click here to get Model</a></p>
+                        <p>Script inside MainScript:</p>
+                        <pre><code>https://pastebin.com/raw/WttU0nxX</code></pre>
+                        <button class="copy-btn">Copy MainScript Link</button>
+                        <p>Shiftlock Local Script:</p>
+                        <pre><code>https://pastebin.com/raw/k0MyN0Wa</code></pre>
+                        <button class="copy-btn">Copy Shiftlock Script Link</button>
+                    </div>
+
+                    <!-- Card 9 -->
+                    <div class="script-card">
+                        <h3>How to make Satoru Gojo Moveset</h3>
+                        <div class="video-wrapper">
+                            <iframe src="https://www.youtube.com/embed/cyOb-gzxiNg" allowfullscreen></iframe>
+                        </div>
+                        <p><a href="https://create.roblox.com/store/asset/83797749474521/Gojo-Moveset" target="_blank">Download Gojo Moveset Model</a></p>
+                    </div>
+                </section>
             </div>
 
             <!-- About Section -->
@@ -315,8 +389,8 @@ end)</code></pre>
                     <div class="about-text">
                         <h3>Roblox Scripting Specialist</h3>
                         <p>I'm MrAwo, a dedicated Roblox developer focused on creating smooth, fun, and optimized gameplay experiences using Lua.</p>
-                        <p>I build custom tools, GUIs, tycoons, obbies, and full game systems. Whether you need a simple script or a complete overhaul, I deliver clean, efficient code.</p>
-                        <p>Let's bring your Roblox game ideas to life!</p>
+                        <p>I share free scripts, models, and tutorials to help the community build better games.</p>
+                        <p>Enjoy the resources and happy developing!</p>
                     </div>
                 </div>
             </div>
@@ -327,5 +401,19 @@ end)</code></pre>
         </footer>
     </div>
     <script src="templatemo-nexa-scripts.js"></script>
+
+    <!-- Optional: Simple copy functionality -->
+    <script>
+        document.querySelectorAll('.copy-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const code = btn.previousElementSibling.querySelector('code').textContent.trim();
+                navigator.clipboard.writeText(code).then(() => {
+                    btn.textContent = 'Copied!';
+                    setTimeout(() => btn.textContent = btn.dataset.original || 'Copy', 2000);
+                });
+            });
+            btn.dataset.original = btn.textContent;
+        });
+    </script>
 </body>
 </html>
